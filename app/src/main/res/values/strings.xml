@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Videocilios</string>
+    <string name="title_activity_pruebaaaaa">Pruebaaaaa</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="main_activity_title">Actividad Principal</string>
+    <string name="connection_problems">Problemas de conexión, intenta nuevamente</string>
+    <string name="retry_connect">Reintentar</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_order_by_date">Ordenar por fecha</string>
+    <string name="action_order_by_name">Ordenar por nombre</string>
+</resources>
