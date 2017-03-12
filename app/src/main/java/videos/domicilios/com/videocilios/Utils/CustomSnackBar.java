@@ -48,7 +48,8 @@ public class CustomSnackBar {
 
             @Override
             public void onViewDetachedFromWindow(View view) {
-                listener.snackBarHidding();
+                if (listener != null)
+                    listener.snackBarHiding();
             }
         });
         mSnackbar.show();

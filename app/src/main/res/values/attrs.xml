@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LatoFontTextView">
+        <attr name="fontName" />
+    </declare-styleable>
+    <attr name="fontName" format="enum">
+        <enum name="Lato_Black" value="1" />
+        <enum name="Lato_BlackItalic" value="2" />
+        <enum name="Lato_Bold" value="3" />
+        <enum name="Lato_BoldItalic" value="4" />
+        <enum name="Lato_Hairline" value="5" />
+        <enum name="Lato_HairlineItalic" value="6" />
+        <enum name="Lato_Italic" value="7" />
+        <enum name="Lato_Light" value="8" />
+        <enum name="Lato_LightItalic" value="9" />
+        <enum name="Lato_Regular" value="10" />
+    </attr>
+</resources>

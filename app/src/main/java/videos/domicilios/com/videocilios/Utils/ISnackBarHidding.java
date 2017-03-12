@@ -5,5 +5,5 @@ package videos.domicilios.com.videocilios.Utils;
  */
 
 public interface ISnackBarHidding {
-    void snackBarHidding();
+    void snackBarHiding();
 }

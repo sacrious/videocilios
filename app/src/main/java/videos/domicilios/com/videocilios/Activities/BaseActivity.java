@@ -1,5 +1,6 @@
 package videos.domicilios.com.videocilios.Activities;
 
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    @SuppressWarnings("all")
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
         this.fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
@@ -37,7 +39,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (useToolbar())
+            setSupportActionBar(toolbar);
+        else
+            toolbar.setVisibility(View.GONE);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, this.fullView, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -46,6 +51,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) this.fullView.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    protected boolean useToolbar() {
+        return true;
     }
 
     protected void showLoading() {
@@ -65,34 +74,34 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected void showRetry() {
         Snackbar.make(fullView, getResources().getString(R.string.connection_problems), Snackbar.LENGTH_INDEFINITE)
                 .setAction(getResources().getString(R.string.retry_connect), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performRequest();
-            }
-        }).show();
+                    @Override
+                    public void onClick(View view) {
+                        performRequest();
+                    }
+                }).show();
     }
 
     protected void performRequest() {
-        return;
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+//        if (id == R.id.nav_camera) {
+//
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_share) {
+            startActivity(new Intent(this, AboutActivity.class));
         }
+//        else if (id == R.id.nav_send) {
+//
+//        }
         fullView.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:background="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/img_arrow"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_margin="@dimen/text_margin"
+        android:src="@drawable/ic_keyboard_arrow_down_black_36dp" />
 
-    <TextView
+    <videos.domicilios.com.videocilios.Utils.LatoFontTextView
         android:id="@+id/txt_header_name"
+        style="@style/MediumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:text="Home"
-        android:textStyle="bold" />
+        android:layout_toEndOf="@+id/txt_movie_count"
+        android:layout_toRightOf="@+id/txt_movie_count"
+        android:ellipsize="end"
+        android:maxLength="20"
+        app:fontName="Lato_Regular" />
+
+    <videos.domicilios.com.videocilios.Utils.LatoFontTextView
+        android:id="@+id/txt_movie_count"
+        style="@style/MediumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/img_arrow"
+        android:layout_toStartOf="@+id/img_arrow"
+        android:ellipsize="end"
+        android:maxLength="3"
+        app:fontName="Lato_LightItalic" />
 </RelativeLayout>

@@ -13,7 +13,7 @@ import java.util.Locale;
  * Created by proximate on 3/10/17.
  */
 
-public class Movie implements  Comparable<Movie>{
+public class Movie implements Comparable<Movie> {
     @SerializedName("poster_path")
     private String posterPath;
     @SerializedName("adult")

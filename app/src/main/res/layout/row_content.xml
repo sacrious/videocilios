@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/img_movie"
@@ -10,42 +12,49 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/img_background" />
 
-    <TextView
+    <videos.domicilios.com.videocilios.Utils.LatoFontTextView
         android:id="@+id/txt_title_movie"
+        style="@style/MovieTitleTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/img_movie"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:maxLines="2"
+        android:text="asdasdahidahsasdasdadasdadadadasdasdasdasdadoid "
+        app:fontName="Lato_Bold" />
 
-    <TextView
+    <videos.domicilios.com.videocilios.Utils.LatoFontTextView
         android:id="@+id/txt_release_date_movie"
+        style="@style/MovieSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_title_movie"
         android:layout_toRightOf="@+id/img_movie"
-        android:textColor="@color/colorAccent" />
+        android:text="asdasdahidahsoi"
+        app:fontName="Lato_Light" />
 
     <RatingBar
         android:id="@+id/rating_movie"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/txt_release_date_movie"
         android:layout_toRightOf="@+id/img_movie"
         android:isIndicator="true"
         android:numStars="10"
         android:stepSize="0.1" />
 
-    <TextView
+    <videos.domicilios.com.videocilios.Utils.LatoFontTextView
         android:id="@+id/rating_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/rating_movie"
-        android:layout_alignRight="@+id/rating_movie"
-        android:textColor="@color/colorPrimary" />
+        android:layout_alignBottom="@+id/img_movie"
+        android:layout_toRightOf="@+id/img_movie"
+        android:text="as"
+        app:fontName="Lato_BlackItalic"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
 
 </RelativeLayout>

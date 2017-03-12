@@ -1,7 +1,9 @@
 package videos.domicilios.com.videocilios.Adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -9,15 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import videos.domicilios.com.videocilios.R;
+import videos.domicilios.com.videocilios.Utils.LatoFontTextView;
+
 
 /**
  * Created by proximate on 3/10/17.
@@ -73,6 +72,7 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
 
     public class HeaderViewHolder extends ViewHolder {
         ImageView arrow;
+        View viewContainer;
 
         public HeaderViewHolder(View view) {
             super(view);
@@ -92,10 +92,9 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
 
         public HeaderViewHolder(View view, final ImageView arrow) {
             super(view);
-
             this.arrow = arrow;
-
-            arrow.setOnClickListener(new View.OnClickListener() {
+            this.viewContainer = view;
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     handleClick();
@@ -104,15 +103,26 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
         }
 
         protected void handleClick() {
+
             if (toggleExpandedItems(getLayoutPosition(), false)) {
-                openArrow(arrow);
+                openArrow(arrow, viewContainer);
+
             } else {
-                closeArrow(arrow);
+                closeArrow(arrow, viewContainer);
             }
         }
 
         public void bind(int position) {
-            arrow.setRotation(isExpanded(position) ? 90 : 0);
+            if (isExpanded(position)) {
+//                arrow.setRotation(90);
+                openArrow(arrow, viewContainer);
+
+
+            } else {
+//                arrow.setRotation(0);
+                closeArrow(arrow, viewContainer);
+
+            }
         }
     }
 
@@ -266,13 +276,34 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
         }
     }
 
-    public static void openArrow(View view) {
+    public static void openArrow(View view, View viewContainer) {
         view.animate().setDuration(ARROW_ROTATION_DURATION).rotation(180);
+        viewContainer.setBackgroundColor(ContextCompat.getColor(viewContainer.getContext(), R.color.selected_background));
+        changeTextColor(Color.WHITE, viewContainer);
+        ((ImageView) view).setColorFilter(Color.WHITE);
 
     }
 
-    public static void closeArrow(View view) {
+    public static void closeArrow(View view, View viewContainer) {
         view.animate().setDuration(ARROW_ROTATION_DURATION).rotation(0);
+        int[] attrs = new int[]{R.attr.selectableItemBackground};
+        TypedArray typedArray = viewContainer.getContext().obtainStyledAttributes(attrs);
+        int backgroundResource = typedArray.getResourceId(0, 0);
+        viewContainer.setBackgroundResource(backgroundResource);
+        typedArray.recycle();
+        changeTextColor(Color.BLACK, viewContainer);
+        ((ImageView) view).setColorFilter(Color.BLACK);
+    }
+
+    private static void changeTextColor(int color, View viewContainer) {
+        int viewSize = ((ViewGroup) viewContainer).getChildCount();
+        for (int i = 0; i < viewSize; i++) {
+            View view = ((ViewGroup) viewContainer).getChildAt(i);
+            if (view instanceof LatoFontTextView) {
+                LatoFontTextView textView = (LatoFontTextView) view;
+                textView.setTextColor(color);
+            }
+        }
     }
 
     public int getMode() {

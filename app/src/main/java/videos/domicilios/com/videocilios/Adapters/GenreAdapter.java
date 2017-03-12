@@ -1,7 +1,10 @@
 package videos.domicilios.com.videocilios.Adapters;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +24,9 @@ import java.util.List;
 import videos.domicilios.com.videocilios.Model.Genre;
 import videos.domicilios.com.videocilios.Model.Movie;
 import videos.domicilios.com.videocilios.R;
+import videos.domicilios.com.videocilios.Rest.ConstantsUrl;
+import videos.domicilios.com.videocilios.Utils.IRowSelected;
+import videos.domicilios.com.videocilios.Utils.LatoFontTextView;
 
 /**
  * Created by proximate on 3/10/17.
@@ -28,37 +34,23 @@ import videos.domicilios.com.videocilios.R;
 
 public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreItems> {
 
-    private static final String URL_IMG = "http://image.tmdb.org/t/p/w185/";
-
     private List<Genre> genres;
+    private IRowSelected listener;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
 
-    public GenreAdapter(Context context, List<Genre> genres) {
+    public GenreAdapter(Context context, List<Genre> genres, IRowSelected listener) {
         super(context);
 
+        this.listener = listener;
         this.genres = genres;
-
-
-//        options = new DisplayImageOptions.Builder()
-//                // Bitmaps in RGB_565 consume 2 times less memory than in ARGB_8888.
-//                .bitmapConfig(Bitmap.Config.RGB_565)
-//                .imageScaleType(ImageScaleType.EXACTLY)
-//                .cacheInMemory(false)
-//                .displayer(new CircleBitmapDisplayer())
-//                .showImageOnLoading(R.mipmap.ic_launcher)
-//                .showImageForEmptyUri(R.mipmap.ic_launcher)
-//                .showImageOnFail(R.mipmap.ic_launcher)
-//                .cacheOnDisk(true)
-//                .build();
         options = new DisplayImageOptions.Builder()
-                // Bitmaps in RGB_565 consume 2 times less memory than in ARGB_8888.
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .cacheInMemory(true)
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.drawable.img_background)
+                .showImageForEmptyUri(R.drawable.img_background)
+                .showImageOnFail(R.drawable.img_background_error)
                 .cacheOnDisk(true)
                 .build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
@@ -72,12 +64,14 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
 
     public static class GenreItems extends ExpandableRecyclerAdapter.ListItem {
         public String name;
+        public int movieQuantity;
         public Movie movie;
 
-        public GenreItems(String section) {
+        public GenreItems(String section, int movieQuantity) {
             super(TYPE_HEADER);
 
             this.name = section;
+            this.movieQuantity = movieQuantity;
         }
 
         public GenreItems(Movie movie) {
@@ -87,42 +81,55 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
     }
 
     public class HeaderViewHolder extends ExpandableRecyclerAdapter.HeaderViewHolder {
-        TextView name;
+        private final LatoFontTextView headerName;
+        private final LatoFontTextView headerMovieQuantity;
+        private final View viewContainer;
 
         public HeaderViewHolder(View view) {
             super(view, (ImageView) view.findViewById(R.id.img_arrow));
+            headerName = (LatoFontTextView) view.findViewById(R.id.txt_header_name);
+            headerMovieQuantity = (LatoFontTextView) view.findViewById(R.id.txt_movie_count);
+            viewContainer = view;
 
-            name = (TextView) view.findViewById(R.id.txt_header_name);
         }
 
         public void bind(int position) {
             super.bind(position);
 
-            name.setText(visibleItems.get(position).name);
+            headerName.setText(visibleItems.get(position).name);
+            headerMovieQuantity.setText(String.valueOf(visibleItems.get(position).movieQuantity));
         }
     }
 
     public class ContentViewHolder extends ExpandableRecyclerAdapter.ViewHolder {
 
         private final RatingBar ratingBar;
-        private final TextView txtRatingNumber, txtTitleMovie, txtDate;
+        private final LatoFontTextView txtRatingNumber, txtTitleMovie, txtDate;
         private final ImageView imgMovie;
+        private final View containerView;
 
         public ContentViewHolder(View view) {
             super(view);
-            ratingBar = (RatingBar) view.findViewById(R.id.rating_movie);
-            txtRatingNumber = (TextView) view.findViewById(R.id.rating_number);
-            txtTitleMovie = (TextView) view.findViewById(R.id.txt_title_movie);
-            txtDate = (TextView) view.findViewById(R.id.txt_release_date_movie);
-            imgMovie = (ImageView) view.findViewById(R.id.img_movie);
+            this.ratingBar = (RatingBar) view.findViewById(R.id.rating_movie);
+            this.txtRatingNumber = (LatoFontTextView) view.findViewById(R.id.rating_number);
+            this.txtTitleMovie = (LatoFontTextView) view.findViewById(R.id.txt_title_movie);
+            this.txtDate = (LatoFontTextView) view.findViewById(R.id.txt_release_date_movie);
+            this.imgMovie = (ImageView) view.findViewById(R.id.img_movie);
+            this.containerView = view;
         }
 
-        public void bind(int position) {
+        public void bind(final int position) {
             txtRatingNumber.setText(String.valueOf(visibleItems.get(position).movie.getVoteAverage()));
             txtTitleMovie.setText(visibleItems.get(position).movie.getTitle());
             txtDate.setText(visibleItems.get(position).movie.getReleaseDate());
             ratingBar.setRating(Float.parseFloat(txtRatingNumber.getText().toString()));
-            imageLoader.displayImage(URL_IMG + visibleItems.get(position).movie.getBackdropPath(), imgMovie, options);
+            imageLoader.displayImage(ConstantsUrl.URL_IMG_185W + visibleItems.get(position).movie.getPosterPath(), imgMovie, options);
+            containerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onRowSelected(visibleItems.get(position).movie, imgMovie, txtTitleMovie, txtRatingNumber, txtDate);
+                }
+            });
         }
 
     }
@@ -156,7 +163,7 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
         List<GenreItems> items = new ArrayList<>();
         for (Genre genre : genres) {
             if (genre.getMovies().size() > 0) {
-                items.add(new GenreItems(genre.getName() + " " + genre.getMovies().size()));
+                items.add(new GenreItems(genre.getName(), genre.getMovies().size()));
                 for (Movie movie : genre.getMovies()) {
                     items.add(new GenreItems(movie));
                 }

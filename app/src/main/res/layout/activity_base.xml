@@ -30,8 +30,8 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         app:lottie_fileName="MotionCorpse-Jrcanest.json"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />

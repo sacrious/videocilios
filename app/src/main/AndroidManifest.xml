@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.BaseActivity" />
-        <activity android:name=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".Activities.MovieDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".Activities.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.MainActivity" />
     </application>
 
 </manifest>
