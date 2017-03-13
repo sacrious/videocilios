@@ -27,7 +27,6 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:src="@drawable/own_picture" />
 
             <android.support.v7.widget.Toolbar
@@ -58,6 +57,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/about_me"
                 app:fontName="Lato_Regular" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:alpha="0"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="wink.json"
+                app:lottie_loop="false" />
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>

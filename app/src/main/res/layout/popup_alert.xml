@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <videos.domicilios.com.videocilios.Utils.LatoFontTextView
+            android:id="@+id/txt_overview"
+            style="@style/MediumTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/overview"
+            app:fontName="Lato_Bold" />
+
+        <videos.domicilios.com.videocilios.Utils.LatoFontTextView
+            android:id="@+id/txt_movie_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_overview"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_movie_overview"
+            android:layout_margin="@dimen/text_margin"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/ok" />
+
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

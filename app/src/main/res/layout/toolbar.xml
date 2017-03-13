@@ -6,4 +6,10 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     app:layout_scrollFlags="enterAlways|scroll"
-    app:popupTheme="@style/AppTheme.PopupOverlay" />
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/domicilios_logo" />
+</android.support.v7.widget.Toolbar>

@@ -1,22 +1,16 @@
 package videos.domicilios.com.videocilios.Adapters;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +23,10 @@ import videos.domicilios.com.videocilios.Utils.IRowSelected;
 import videos.domicilios.com.videocilios.Utils.LatoFontTextView;
 
 /**
- * Created by proximate on 3/10/17.
+ * Created by Sergio on 3/10/17.
  */
 
+@SuppressWarnings("all")
 public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreItems> {
 
     private List<Genre> genres;
@@ -53,11 +48,6 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
                 .showImageOnFail(R.drawable.img_background_error)
                 .cacheOnDisk(true)
                 .build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                context)
-                .defaultDisplayImageOptions(options)
-                .memoryCache(new WeakMemoryCache()).build();
-        ImageLoader.getInstance().init(config);
         imageLoader = ImageLoader.getInstance();
         setItems(getItems(genres));
     }
@@ -104,8 +94,9 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
     public class ContentViewHolder extends ExpandableRecyclerAdapter.ViewHolder {
 
         private final RatingBar ratingBar;
-        private final LatoFontTextView txtRatingNumber, txtTitleMovie, txtDate;
-        private final ImageView imgMovie;
+        LatoFontTextView txtRatingNumber;
+        public final LatoFontTextView txtTitleMovie, txtDate;
+        public final ImageView imgMovie;
         private final View containerView;
 
         public ContentViewHolder(View view) {
@@ -118,16 +109,26 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
             this.containerView = view;
         }
 
-        public void bind(final int position) {
+        public void bind(final int position, final ViewHolder holder) {
             txtRatingNumber.setText(String.valueOf(visibleItems.get(position).movie.getVoteAverage()));
             txtTitleMovie.setText(visibleItems.get(position).movie.getTitle());
             txtDate.setText(visibleItems.get(position).movie.getReleaseDate());
             ratingBar.setRating(Float.parseFloat(txtRatingNumber.getText().toString()));
-            imageLoader.displayImage(ConstantsUrl.URL_IMG_185W + visibleItems.get(position).movie.getPosterPath(), imgMovie, options);
+            imageLoader.displayImage(ConstantsUrl.URL_IMG_92W + visibleItems.get(position).movie.getPosterPath(), imgMovie, options);
+            ViewCompat.setTransitionName(imgMovie, String.valueOf(position) + "_image");
+            ViewCompat.setTransitionName(txtTitleMovie, String.valueOf(position) + "_title");
+            ViewCompat.setTransitionName(txtDate, String.valueOf(position) + "_date");
             containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onRowSelected(visibleItems.get(position).movie, imgMovie, txtTitleMovie, txtRatingNumber, txtDate);
+                    listener.onRowClick(holder, visibleItems.get(position).movie);
+                }
+            });
+            containerView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onRowLongClick(holder, visibleItems.get(position).movie);
+                    return true;
                 }
             });
         }
@@ -154,7 +155,7 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
                 break;
             case TYPE_CONTENT:
             default:
-                ((ContentViewHolder) holder).bind(position);
+                ((ContentViewHolder) holder).bind(position, holder);
                 break;
         }
     }

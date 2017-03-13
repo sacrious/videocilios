@@ -5,6 +5,6 @@ package videos.domicilios.com.videocilios.Rest;
  */
 
 public class ConstantsUrl {
-    public static final String URL_IMG_185W = "http://image.tmdb.org/t/p/w185/";
-    public static final String URL_IMG_300W = "http://image.tmdb.org/t/p/w500/";
+    public static final String URL_IMG_92W = "http://image.tmdb.org/t/p/w92";
+    public static final String URL_IMG_300W = "http://image.tmdb.org/t/p/w500";
 }

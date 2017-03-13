@@ -71,7 +71,7 @@ public class MovieDetailActivity extends BaseActivity {
                 ageRestrictionImg.setImageResource(R.drawable.everyone);
             }
             imageLoader.displayImage(ConstantsUrl.URL_IMG_300W + movie.getBackdropPath(), headerImg, options);
-            imageLoader.displayImage(ConstantsUrl.URL_IMG_185W + movie.getPosterPath(), posterImg, options);
+            imageLoader.displayImage(ConstantsUrl.URL_IMG_92W + movie.getPosterPath(), posterImg, options);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             posterImg.setTransitionName(getString(R.string.activity_img_trans));

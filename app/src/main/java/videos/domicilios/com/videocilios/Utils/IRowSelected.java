@@ -1,5 +1,6 @@
 package videos.domicilios.com.videocilios.Utils;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,5 +10,7 @@ import android.widget.TextView;
  */
 
 public interface IRowSelected {
-    void onRowSelected(Object object, ImageView moviePicture, TextView movieTitle, TextView ratingNumber, TextView dateRelease);
+    void onRowClick(RecyclerView.ViewHolder viewHolder, Object object);
+
+    void onRowLongClick(RecyclerView.ViewHolder viewHolder, Object object);
 }

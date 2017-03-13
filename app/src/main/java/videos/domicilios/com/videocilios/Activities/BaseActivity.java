@@ -1,48 +1,66 @@
 package videos.domicilios.com.videocilios.Activities;
 
+//region Imports
+
 import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import videos.domicilios.com.videocilios.R;
+//endregion
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //region Variables
     private DrawerLayout fullView;
     private LottieAnimationView animationView;
+    //endregion
 
+    //region LifeCycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext())
+                .memoryCache(new WeakMemoryCache()).build();
+        ImageLoader.getInstance().init(config);
     }
+    //endregion
 
+    /**
+     * Overrides for showing Navigation Menu on all activities
+     *
+     * @param layoutResID layout id
+     */
     @Override
     @SuppressWarnings("all")
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
         this.fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
         this.animationView = (LottieAnimationView) fullView.findViewById(R.id.animation_view);
-        NestedScrollView activityContainer = (NestedScrollView) fullView.findViewById(R.id.activity_content);
+        this.hideLoading();
+        FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(fullView);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (useToolbar())
-            setSupportActionBar(toolbar);
-        else
-            toolbar.setVisibility(View.GONE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, this.fullView, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,59 +71,53 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    protected boolean useToolbar() {
-        return true;
-    }
+    //region LoadingView
 
-    protected void showLoading() {
+    /**
+     * Show animation for loading
+     */
+    public void showLoading() {
         this.animationView.setVisibility(View.VISIBLE);
         this.animationView.playAnimation();
     }
 
-    protected void hideLoading() {
+    /**
+     * Hides animation for loading
+     */
+    public void hideLoading() {
         this.animationView.cancelAnimation();
         this.animationView.setVisibility(View.GONE);
     }
+    //endregion
 
-    protected View getContainerView() {
+    /**
+     * Get the container view
+     *
+     * @return container view
+     */
+    public View getContainerView() {
         return fullView;
     }
 
-    protected void showRetry() {
-        Snackbar.make(fullView, getResources().getString(R.string.connection_problems), Snackbar.LENGTH_INDEFINITE)
-                .setAction(getResources().getString(R.string.retry_connect), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        performRequest();
-                    }
-                }).show();
-    }
 
-    protected void performRequest() {
-    }
-
+    //region OnNavigationItemSelectedListener
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-//        if (id == R.id.nav_camera) {
-//
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-
         if (id == R.id.nav_share) {
             startActivity(new Intent(this, AboutActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         }
-//        else if (id == R.id.nav_send) {
-//
-//        }
         fullView.closeDrawer(GravityCompat.START);
         return true;
     }
+    //endregion
 
+    //region BackPressed
+
+    /**
+     * Handles when DrawerOpen close it
+     */
     @Override
     public void onBackPressed() {
         if (this.fullView.isDrawerOpen(GravityCompat.START)) {
@@ -114,4 +126,5 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+    //endregion
 }

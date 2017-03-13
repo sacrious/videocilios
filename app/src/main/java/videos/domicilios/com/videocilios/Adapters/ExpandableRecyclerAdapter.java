@@ -19,9 +19,9 @@ import videos.domicilios.com.videocilios.Utils.LatoFontTextView;
 
 
 /**
- * Created by proximate on 3/10/17.
+ * Created by Sergio on 3/10/17.
  */
-
+@SuppressWarnings("all")
 public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdapter.ListItem> extends RecyclerView.Adapter<ExpandableRecyclerAdapter.ViewHolder> {
     protected Context mContext;
     protected List<T> allItems = new ArrayList<>();
@@ -81,11 +81,6 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
                 @Override
                 public void onClick(View v) {
                     toggleExpandedItems(getLayoutPosition(), false);
-                /*if(isExpanded(getLayoutPosition())){
-                    collapseItems(getLayoutPosition(),false);
-                }else {
-                    expandItems(getLayoutPosition(),true);
-                }*/
                 }
             });
         }
@@ -103,26 +98,17 @@ public abstract class ExpandableRecyclerAdapter<T extends ExpandableRecyclerAdap
         }
 
         protected void handleClick() {
-
-            if (toggleExpandedItems(getLayoutPosition(), false)) {
+            if (toggleExpandedItems(getLayoutPosition(), false))
                 openArrow(arrow, viewContainer);
-
-            } else {
+            else
                 closeArrow(arrow, viewContainer);
-            }
         }
 
         public void bind(int position) {
-            if (isExpanded(position)) {
-//                arrow.setRotation(90);
+            if (isExpanded(position))
                 openArrow(arrow, viewContainer);
-
-
-            } else {
-//                arrow.setRotation(0);
+            else
                 closeArrow(arrow, viewContainer);
-
-            }
         }
     }
 
