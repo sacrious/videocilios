@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 
 
 /**
- * Created by proximate on 3/12/17.
+ * Created by Sergio on 3/12/17.
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class DetailsTransition extends TransitionSet{

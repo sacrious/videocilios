@@ -77,17 +77,17 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
 
         public HeaderViewHolder(View view) {
             super(view, (ImageView) view.findViewById(R.id.img_arrow));
-            headerName = (LatoFontTextView) view.findViewById(R.id.txt_header_name);
-            headerMovieQuantity = (LatoFontTextView) view.findViewById(R.id.txt_movie_count);
-            viewContainer = view;
+            this.headerName = (LatoFontTextView) view.findViewById(R.id.txt_header_name);
+            this.headerMovieQuantity = (LatoFontTextView) view.findViewById(R.id.txt_movie_count);
+            this.viewContainer = view;
 
         }
 
         public void bind(int position) {
             super.bind(position);
 
-            headerName.setText(visibleItems.get(position).name);
-            headerMovieQuantity.setText(String.valueOf(visibleItems.get(position).movieQuantity));
+            this.headerName.setText(visibleItems.get(position).name);
+            this.headerMovieQuantity.setText(String.valueOf(visibleItems.get(position).movieQuantity));
         }
     }
 
@@ -110,21 +110,21 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
         }
 
         public void bind(final int position, final ViewHolder holder) {
-            txtRatingNumber.setText(String.valueOf(visibleItems.get(position).movie.getVoteAverage()));
-            txtTitleMovie.setText(visibleItems.get(position).movie.getTitle());
-            txtDate.setText(visibleItems.get(position).movie.getReleaseDate());
-            ratingBar.setRating(Float.parseFloat(txtRatingNumber.getText().toString()));
+            this.txtRatingNumber.setText(String.valueOf(visibleItems.get(position).movie.getVoteAverage()));
+            this.txtTitleMovie.setText(visibleItems.get(position).movie.getTitle());
+            this.txtDate.setText(visibleItems.get(position).movie.getReleaseDate());
+            this.ratingBar.setRating(Float.parseFloat(txtRatingNumber.getText().toString()));
             imageLoader.displayImage(ConstantsUrl.URL_IMG_92W + visibleItems.get(position).movie.getPosterPath(), imgMovie, options);
             ViewCompat.setTransitionName(imgMovie, String.valueOf(position) + "_image");
             ViewCompat.setTransitionName(txtTitleMovie, String.valueOf(position) + "_title");
             ViewCompat.setTransitionName(txtDate, String.valueOf(position) + "_date");
-            containerView.setOnClickListener(new View.OnClickListener() {
+            this.containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onRowClick(holder, visibleItems.get(position).movie);
                 }
             });
-            containerView.setOnLongClickListener(new View.OnLongClickListener() {
+            this.containerView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     listener.onRowLongClick(holder, visibleItems.get(position).movie);
@@ -132,7 +132,6 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
                 }
             });
         }
-
     }
 
     @Override
@@ -141,6 +140,7 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
             case TYPE_HEADER:
                 return new HeaderViewHolder(inflate(R.layout.row_section, parent));
             case TYPE_CONTENT:
+                return new ContentViewHolder(inflate(R.layout.row_content, parent));
             default:
                 return new ContentViewHolder(inflate(R.layout.row_content, parent));
         }
@@ -154,6 +154,8 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
                 ((HeaderViewHolder) holder).bind(position);
                 break;
             case TYPE_CONTENT:
+                ((ContentViewHolder) holder).bind(position, holder);
+                break;
             default:
                 ((ContentViewHolder) holder).bind(position, holder);
                 break;
@@ -170,7 +172,6 @@ public class GenreAdapter extends ExpandableRecyclerAdapter<GenreAdapter.GenreIt
                 }
             }
         }
-
         return items;
     }
 }

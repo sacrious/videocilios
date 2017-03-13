@@ -14,7 +14,7 @@ import android.widget.TextView;
 import videos.domicilios.com.videocilios.R;
 
 /**
- * Created by proximate on 3/10/17.
+ * Created by Sergio on 3/10/17.
  */
 
 public class CustomSnackBar {

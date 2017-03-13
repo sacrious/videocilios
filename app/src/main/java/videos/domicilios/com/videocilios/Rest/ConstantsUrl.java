@@ -1,7 +1,7 @@
 package videos.domicilios.com.videocilios.Rest;
 
 /**
- * Created by proximate on 3/11/17.
+ * Created by Sergio on 3/11/17.
  */
 
 public class ConstantsUrl {

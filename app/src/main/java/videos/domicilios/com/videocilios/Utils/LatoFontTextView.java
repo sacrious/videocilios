@@ -9,7 +9,7 @@ import android.widget.TextView;
 import videos.domicilios.com.videocilios.R;
 
 /**
- * Created by proximate on 3/11/17.
+ * Created by Sergio on 3/11/17.
  */
 
 public class LatoFontTextView extends TextView {
