@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import videos.domicilios.com.videocilios.Interfaces.ISnackBarHidding;
 import videos.domicilios.com.videocilios.R;
 
 /**

@@ -19,7 +19,7 @@ import videos.domicilios.com.videocilios.Model.Genre;
 import videos.domicilios.com.videocilios.Model.Movie;
 import videos.domicilios.com.videocilios.R;
 import videos.domicilios.com.videocilios.Rest.ConstantsUrl;
-import videos.domicilios.com.videocilios.Utils.IRowSelected;
+import videos.domicilios.com.videocilios.Interfaces.IRowSelected;
 import videos.domicilios.com.videocilios.Utils.LatoFontTextView;
 
 /**

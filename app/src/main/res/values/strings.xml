@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">Videocilios</string>
-    <string name="title_activity_pruebaaaaa">Pruebaaaaa</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="main_activity_title">VideoCilios</string>
+    <!-- MOVIE LIST FRAGMENT -->
     <string name="connection_problems">Problemas de conexión, intenta nuevamente</string>
     <string name="retry_connect">Reintentar</string>
     <string name="action_search">Buscar</string>
@@ -13,16 +9,16 @@
     <string name="action_order_by_name">Ordenar por nombre</string>
     <string name="action_expand_all">Expandir lista</string>
     <string name="action_collapse_all">Colapsar Vista</string>
-    <string name="activity_img_trans">img_transition</string>
-    <string name="activity_text_trans">txt_transition</string>
-    <string name="activity_mixed_trans">container_transition</string>
+
+    <!-- ABOUT ACTIVITY -->
     <string name="title_activity_about">Acerca de mí</string>
     <string name="no_pdf_reader">Estás tratando de ver mi hoja de vida, pero al parecer no cuentas con una app que lea application/pdf, descarga un PDF reader</string>
     <string name="email_subject">Críticas constructivas - Domicilios.com</string>
     <string name="email_body">Hola Sergio!!!, Buen día!!!</string>
-    <string name="about_me">Hola!\n\nYa viste la funcionalidad que tiene el Floating Button?, intentalo y podrás ver mi Currículum Vitae, además puedes escribirme un correo dandome las sugerencias/críticas que quieras.\n\nAlgunos inconvenientes que se presentaron con respecto al desarrollo de la prueba: \n\n• Decidí arriesgarme a consumir los servicios usando Retrofit, ya que en el momento que tuve entrevista con el Ingeniero Alejandro, me comentó que es lo que estaban usando. Tal vez me falten cosas por aprender de está librería, lo ideal es aprender con ustedes.\n\n• La API no trae Películas relacionadas con los nombres de los generos, solo por ID, debí consumir dos servicios y luego realizar la relación Generos - Películas.\n\n• Por lo general para realizar aplicaciones me confío mucho de un diseñador para la realización del UI/UX del Look and Feel de la app, estuvo bueno el reto en este caso, espero no me haya ido tan mal en este punto.\n\nLibrerías usadas:\n\n• Gson\n\n• Retrofit\n\n• UniversalImageLoader\n\n •Lottie\n\nMuchas gracias. Éxitos</string>
+    <string name="about_me">Hola!\n\nYa viste la funcionalidad que tiene el Floating Button?, intentalo y podrás ver mi Currículum Vitae, además puedes escribirme un correo dandome las sugerencias/críticas que quieras.\n\nAlgunos inconvenientes que se presentaron con respecto al desarrollo de la prueba: \n\n• Decidí arriesgarme a consumir los servicios usando Retrofit, ya que en el momento que tuve entrevista con el Ingeniero Alejandro, me comentó que es lo que estaban usando. Tal vez me falten cosas por aprender de está librería, lo ideal es aprender con ustedes.\n\n• La API no trae Películas relacionadas con los nombres de los generos, solo por ID, debí consumir dos servicios y luego realizar la relación Generos - Películas.\n\n• En las listas expandibles el contenido interno no reacciona al adapter.notifydatasetchanged(), solamente me funciona con los headers de las secciones, lo logré hacer recreando el adaptador y relacionandolo nuevamente al recycler.\n\n• Por lo general para realizar aplicaciones me confío mucho de un diseñador para la realización del UI/UX del Look and Feel de la app, estuvo bueno el reto en este caso, espero no me haya ido tan mal en este punto.\n\nLibrerías usadas:\n\n• Gson\n\n• Retrofit\n\n• UniversalImageLoader\n\n •Lottie\n\n •RxJava\n\nMuchas gracias. Éxitos</string>
 
 
+    <!-- FONT NAMES -->
     <string name="Lato_Black">Lato-Black</string>
     <string name="Lato_BlackItalic">Lato-BlackItalic</string>
     <string name="Lato_Bold">Lato-Bold</string>
@@ -33,15 +29,24 @@
     <string name="Lato_Light">Lato-Light</string>
     <string name="Lato_LightItalic">Lato-LightItalic</string>
     <string name="Lato_Regular">Lato-Regular</string>
+
+    <!-- TRANSITIONS -->
+    <string name="activity_img_trans">img_transition</string>
+    <string name="activity_text_trans">txt_transition</string>
+    <string name="activity_mixed_trans">container_transition</string>
     <string name="activity_text_rating_trans">txt_transition_rating</string>
     <string name="activity_text_date_trans">txt_transition_date</string>
+
+    <!-- MOVIE DETAIL FRAGMENT -->
     <string name="release_date">Fecha lanzamiento: %s</string>
     <string name="vote_count">Cantidad de votos: %s</string>
-    <string name="about_me_nav">Acerca</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="overview">Resumen</string>
-    <string name="ok">Ok</string>
+
+    <!-- NAVIGATION DRAWER -->
+    <string name="about_me_nav">Acerca</string>
     <string name="domicilios">Domicilios.com</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

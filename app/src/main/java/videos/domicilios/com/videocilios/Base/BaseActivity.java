@@ -1,4 +1,4 @@
-package videos.domicilios.com.videocilios.Activities;
+package videos.domicilios.com.videocilios.Base;
 
 //region Imports
 
@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import videos.domicilios.com.videocilios.Activities.AboutActivity;
 import videos.domicilios.com.videocilios.R;
 //endregion
 
@@ -72,6 +73,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //region LoadingView
+
+    /**
+     * Know if loading is currently showing
+     */
+    public boolean isLoadingShowing() {
+        return this.animationView.getVisibility() == View.VISIBLE;
+    }
 
     /**
      * Show animation for loading

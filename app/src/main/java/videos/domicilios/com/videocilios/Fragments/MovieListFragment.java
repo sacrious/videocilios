@@ -42,8 +42,8 @@ import videos.domicilios.com.videocilios.R;
 import videos.domicilios.com.videocilios.Rest.ApiInterface;
 import videos.domicilios.com.videocilios.Utils.CustomSnackBar;
 import videos.domicilios.com.videocilios.Utils.DetailsTransition;
-import videos.domicilios.com.videocilios.Utils.IRowSelected;
-import videos.domicilios.com.videocilios.Utils.ISnackBarHidding;
+import videos.domicilios.com.videocilios.Interfaces.IRowSelected;
+import videos.domicilios.com.videocilios.Interfaces.ISnackBarHidding;
 //endregion
 
 public class MovieListFragment extends AppFragment<MoviePresenter> implements IObserver, ISnackBarHidding, IRowSelected, SearchView.OnQueryTextListener {
@@ -262,7 +262,8 @@ public class MovieListFragment extends AppFragment<MoviePresenter> implements IO
      *
      * @param mGenres list of genres to display
      */
-    private void setupView(List<Genre> mGenres) {
+    private void
+    setupView(List<Genre> mGenres) {
         adapter = new GenreAdapter(activity.getApplication(), mGenres, this);
         adapter.setMode(ExpandableRecyclerAdapter.MODE_ACCORDION);
         recyclerView.setAdapter(adapter);
@@ -270,7 +271,7 @@ public class MovieListFragment extends AppFragment<MoviePresenter> implements IO
 
     //endregion
 
-    //region Api
+    //region ApiCallback
 
     private void performRequest() {
         presenter.loadData(LANGUAGE, "primary_release_date.desc");
@@ -298,6 +299,7 @@ public class MovieListFragment extends AppFragment<MoviePresenter> implements IO
     @Override
     public void hideLoading() {
         activity.hideLoading();
+        Log.e("Hide", "hide");
     }
 
     @Override
@@ -305,6 +307,7 @@ public class MovieListFragment extends AppFragment<MoviePresenter> implements IO
     public void getDataSuccess(Object model) {
         genres = ((ArrayList<Genre>) model);
         setupView(genres);
+        Log.e("getDataSuccess", "getDataSuccess");
     }
 
     @Override

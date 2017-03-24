@@ -1,4 +1,4 @@
-package videos.domicilios.com.videocilios.Utils;
+package videos.domicilios.com.videocilios.Interfaces;
 
 /**
  * Created by Sergio on 3/10/17.

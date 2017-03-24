@@ -33,8 +33,7 @@ dependencies {
     compile 'com.airbnb.android:lottie:1.5.3'
     compile 'com.android.support:support-v4:25.2.0'
     compile 'io.reactivex:rxjava:1.1.8'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.android.support:design:25.2.0'
     compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     testCompile 'junit:junit:4.12'
 }

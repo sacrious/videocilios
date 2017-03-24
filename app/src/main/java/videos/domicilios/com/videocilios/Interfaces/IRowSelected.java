@@ -1,4 +1,4 @@
-package videos.domicilios.com.videocilios.Utils;
+package videos.domicilios.com.videocilios.Interfaces;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

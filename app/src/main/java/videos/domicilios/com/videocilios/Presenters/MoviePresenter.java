@@ -37,7 +37,6 @@ public class MoviePresenter extends BasePresenter<IObserver> {
             @Override
             public void onFailure(String message) {
                 view.getDataFail(message);
-                view.hideLoading();
             }
 
             @Override
@@ -51,13 +50,13 @@ public class MoviePresenter extends BasePresenter<IObserver> {
      * When the genreRequest has already finish, perform this request to get all movies until 3 page
      */
     void loadMovieData(final String language, final String sort_by, final int page, final List<Genre> genres, final List<Movie> movies) {
-        view.showLoading();
         addSubscribe(api.getMovieSortByDate(API_KEY, language, sort_by, page), new ApiCallback<MovieResponse>() {
             @Override
             public void onSuccess(MovieResponse model) {
                 movies.addAll(model.getResults());
                 if (page == 3) {
                     view.getDataSuccess(addMoviesToGenres(model.getResults(), genres));
+                    view.hideLoading();
                 } else {
                     loadMovieData(language, sort_by, page + 1, addMoviesToGenres(model.getResults(), genres), movies);
                 }
@@ -70,7 +69,7 @@ public class MoviePresenter extends BasePresenter<IObserver> {
 
             @Override
             public void onFinish() {
-                view.hideLoading();
+
             }
         });
     }
